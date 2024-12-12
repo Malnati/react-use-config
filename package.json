@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Malnati/useObserveChanges.git"
+        "url": "git+https://github.com/Malnati/react-use-config.git"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
