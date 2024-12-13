@@ -1,49 +1,51 @@
-
 # Architecture Documentation
 
-This document provides an overview of the project's architecture, including its components, data flow, and design principles.
+This document provides an overview of the `react-use-config` project's architecture, including its components, data flow, and design principles.
 
 ## Overview
-The project is designed with modularity and scalability in mind. Below is a high-level representation of the system architecture:
+The `react-use-config` project is designed with simplicity and flexibility in mind, focusing on providing a reliable hook to manage configuration parameters across different environments.
 
-1. **Frontend**: The user interface, built using [specify framework or language].
-2. **Backend**: Handles the business logic, APIs, and database interactions.
-3. **Database**: Stores all persistent data.
+1. **Hook**: A React hook (`useConfigParam`) that retrieves configuration parameters.
+2. **Sources of Configuration**:
+   - Query parameters from the URL.
+   - Environment variables defined in `.env`.
+   - Default values provided in the code.
 
 ## Components
-### Frontend
-- **Description**: The frontend is responsible for delivering a responsive and interactive user interface.
-- **Technologies**: [e.g., React, Vue.js, Angular].
+### React Hook: `useConfigParam`
+- **Description**: The `useConfigParam` hook retrieves a configuration parameter based on the following priority order:
+  1. Query parameters.
+  2. Environment variables.
+  3. Default values.
+- **Technologies**: Built with React and TypeScript.
 
-### Backend
-- **Description**: The backend provides RESTful APIs for the frontend and handles authentication, data processing, and other business logic.
-- **Technologies**: [e.g., Node.js, Java, Python].
+### Environment Variables
+- **Description**: The hook supports environment variables using the `REACT_APP_` prefix, ensuring compatibility with Create React App and similar setups.
 
-### Database
-- **Description**: The database layer manages data storage and retrieval.
-- **Technologies**: [e.g., PostgreSQL, MongoDB, MySQL].
+### URL Query Parameters
+- **Description**: Query parameters in the URL are parsed and given the highest priority for dynamic configuration during runtime.
 
 ## Data Flow
-1. **User Interaction**: The user interacts with the frontend via a web or mobile application.
-2. **API Requests**: The frontend sends API requests to the backend.
-3. **Data Processing**: The backend processes the requests and interacts with the database if necessary.
-4. **Response**: The backend sends the processed data back to the frontend for display.
-
-## Design Principles
-- **Modularity**: Components are separated into independent, interchangeable modules.
-- **Scalability**: The system can handle increased user loads by scaling horizontally or vertically.
-- **Maintainability**: The codebase is structured to allow easy updates and debugging.
-
-## Diagrams
-Add diagrams to provide a visual representation of the architecture. Example tools include [draw.io](https://app.diagrams.net/) or [PlantUML](https://plantuml.com/).
+1. **Parameter Request**:
+   - A React component calls `useConfigParam` with a parameter name and default value.
+2. **Query Parameter Check**:
+   - The hook first checks the URL's query parameters for the specified name.
+3. **Environment Variable Check**:
+   - If not found in the query, it looks for an environment variable with the prefix `REACT_APP_`.
+4. **Default Value**:
+   - If neither the query nor the environment variable is available, the hook returns the default value.
 
 ```plaintext
-[Frontend] --> [Backend] --> [Database]
+[React Component] --> [useConfigParam] --> [Query Parameters]
+                                         --> [Environment Variables]
+                                         --> [Default Values]
 ```
 
-For detailed architecture diagrams, refer to the files in the `docs/diagrams` folder.
+## Design Principles
+- **Flexibility**: Allows configuration from multiple sources, adapting to various environments.
+- **Simplicity**: Offers a single hook for all configuration needs, reducing complexity in codebases.
+- **Modularity**: The hook can be easily integrated into any React project.
 
----
-
-Feel free to adapt this structure to better suit your project's needs.
+## Diagrams
+Consider adding diagrams to visually represent how `useConfigParam` prioritizes configuration sources. Example tools include [draw.io](https://app.diagrams.net/) or [PlantUML](https://plantuml.com/).
 

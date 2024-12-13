@@ -1,68 +1,86 @@
 
 # Usage Documentation
 
-This document provides instructions on how to use the project, including running the application, using its features, and examples of common use cases.
-
-## Running the Application
-Follow these steps to run the project:
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/project-template.git
-   cd project-template
-   ```
-
-2. **Install Dependencies**:
-   Install the necessary dependencies. For example, if the project uses Node.js:
-   ```bash
-   npm install
-   ```
-
-3. **Start the Application**:
-   Start the application with the provided script:
-   ```bash
-   npm start
-   ```
-
-4. **Access the Application**:
-   Open your browser and navigate to:
-   ```
-   http://localhost:3000
-   ```
+This document provides instructions on how to use the `useConfigParam` hook, including examples and common use cases.
 
 ## Features
-### Feature 1: [Feature Name]
-- **Description**: Briefly describe what this feature does.
-- **Usage**:
+
+### `useConfigParam` Hook
+The `useConfigParam` hook allows you to retrieve a configuration parameter following a priority order:
+1. **Query Parameter**: The value from the URL query string.
+2. **Environment Variable**: The value from an environment variable.
+3. **Default Value**: A fallback value provided as a parameter.
+
+This hook simplifies configuration management, enabling flexibility and adaptability across different environments.
+
+## Installation
+To use this hook in your project:
+
+1. **Install the Package**:
    ```bash
-   command-or-api-example
+   npm install react-use-config
    ```
 
-### Feature 2: [Feature Name]
-- **Description**: Briefly describe what this feature does.
-- **Usage**:
-   ```bash
-   command-or-api-example
+2. **Import the Hook**:
+   Import the `useConfigParam` hook where you need it in your React project:
+   ```javascript
+   import useConfigParam from 'react-use-config';
    ```
 
 ## Examples
-### Example 1: [Use Case]
-Describe the steps to perform this use case. Include relevant code or commands.
 
-### Example 2: [Use Case]
-Describe another use case and its steps.
+### Example 1: Retrieve a GeoServer URL
+You can retrieve a GeoServer URL with a default value:
+
+```javascript
+const geoServer = useConfigParam('geoServer', 'http://localhost:8080/geoserver/isagro/wms');
+console.log(geoServer); // Logs the query param, env var, or default value
+```
+
+### Example 2: Retrieve a Boolean Parameter
+Retrieve a boolean parameter for a configuration, e.g., `showMap`:
+
+```javascript
+const showMap = useConfigParam('showMap', true);
+console.log(showMap); // Logs true or false based on the query param or env var
+```
+
+### Example 3: Fallback to Default Value
+If neither a query parameter nor an environment variable is present, the hook will use the default value:
+
+```javascript
+const maxRetries = useConfigParam('maxRetries', 3);
+console.log(maxRetries); // Logs the default value: 3
+```
 
 ## Troubleshooting
+
 ### Common Issues
-- **Issue 1**: Description of the problem.
-  - **Solution**: Steps to resolve the issue.
 
-- **Issue 2**: Description of the problem.
-  - **Solution**: Steps to resolve the issue.
+- **Error: `paramName is required`**:
+  - This error occurs if the `paramName` argument is missing. Ensure you pass a valid string as the parameter name.
 
-For further questions, consult the [FAQ](#faq) or open an issue on the repository.
+- **Query Parameter Not Found**:
+  - If the query parameter is not available, verify the URL or use the fallback mechanisms (environment variable or default value).
 
----
+- **Environment Variable Not Working**:
+  - Make sure the variable is prefixed with `REACT_APP_` in the `.env` file (e.g., `REACT_APP_GEOSERVER`).
 
-Feel free to update this file as new features or use cases are added to the project.
+## Advanced Usage
+### Query Parameter Priority
+If the URL contains a query parameter, it takes precedence over environment variables and default values:
+```javascript
+// URL: http://localhost:3000/?geoServer=http://example.com/geoserver
+const geoServer = useConfigParam('geoServer', 'http://localhost:8080/geoserver/isagro/wms');
+console.log(geoServer); // Output: http://example.com/geoserver
+```
 
+### Boolean Conversion
+The hook automatically converts `true` and `false` query parameter values to booleans:
+```javascript
+// URL: http://localhost:3000/?showMap=true
+const showMap = useConfigParam('showMap', false);
+console.log(showMap); // Output: true
+```
+
+For further questions, consult the [GitHub Repository](https://github.com/Malnati/react-use-config) or open an issue.
