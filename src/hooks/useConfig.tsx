@@ -34,7 +34,7 @@ const useConfigParam = (paramName: string, defaultValue: any): any => {
   }
 
   const envVal = process?.env?.[`REACT_APP_${paramName.toUpperCase()}`];
-  const viteEnvVal = import.meta?.env?.[`VITE_${paramName.toUpperCase()}`];
+  const viteEnvVal = (import.meta as any)?.env?.[`VITE_${paramName.toUpperCase()}`];
 
   if (!paramValue && envVal) {
     paramValue = envVal;
