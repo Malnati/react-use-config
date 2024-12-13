@@ -7,6 +7,16 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('useConfigParam', () => {
+    beforeAll(() => {
+        jest.spyOn(global.console, 'info').mockImplementation(() => {});
+        jest.spyOn(global.console, 'warn').mockImplementation(() => {});
+        jest.spyOn(global.console, 'error').mockImplementation(() => {});
+    });
+
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
+
     afterEach(() => {
         jest.resetAllMocks();
         delete process.env.REACT_APP_GEOSERVER;
