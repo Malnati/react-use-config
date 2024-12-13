@@ -4,57 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Use Config</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.2rem;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+        section h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+        pre {
+            background: #f4f4f4;
+            border-left: 4px solid #3498db;
+            padding: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: #2c3e50;
+            color: #fff;
+            margin-top: 2rem;
+        }
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>React Use Config</h1>
-        <p>A simple and flexible hook for managing configuration parameters in React projects.</p>
+        <p>Efficiently manage configuration parameters in React projects.</p>
     </header>
     <main>
         <section>
             <h2>What is React Use Config?</h2>
-            <p><strong>React Use Config</strong> provides the <code>useConfigParam</code> hook, which retrieves configuration values based on the following priority:</p>
+            <p><strong>React Use Config</strong> provides the <code>useConfigParam</code> hook to retrieve configuration values with the following priority:</p>
             <ol>
-                <li><strong>Query Parameters:</strong> From the URL.</li>
-                <li><strong>Environment Variables:</strong> Prefixed with <code>REACT_APP_</code>.</li>
-                <li><strong>Default Values:</strong> A fallback if the other options are not set.</li>
+                <li><strong>Query Parameters:</strong> Extracted directly from the URL.</li>
+                <li><strong>Environment Variables:</strong> With the prefix <code>REACT_APP_</code>.</li>
+                <li><strong>Default Values:</strong> Used when no other option is available.</li>
             </ol>
         </section>
         <section>
             <h2>Features</h2>
             <ul>
-                <li>Retrieve parameters dynamically from the URL or environment variables.</li>
-                <li>Supports boolean conversion for parameters like <code>true</code> and <code>false</code>.</li>
-                <li>Customizable default values for unmatched configurations.</li>
-                <li>Lightweight and easy to integrate into any React project.</li>
+                <li>Retrieve parameters dynamically from multiple sources.</li>
+                <li>Automatic boolean conversion for <code>true</code> and <code>false</code>.</li>
+                <li>Customizable default values.</li>
+                <li>Lightweight and easy to integrate.</li>
             </ul>
         </section>
         <section>
             <h2>Getting Started</h2>
-            <p>To start using <strong>React Use Config</strong>, follow the steps below:</p>
+            <p>Follow these steps to start using <strong>React Use Config</strong>:</p>
             <ol>
                 <li><strong>Install the package:</strong></li>
                 <pre><code>npm install react-use-config</code></pre>
-                <li><strong>Use the hook in your project:</strong></li>
+                <li><strong>Import the hook in your project:</strong></li>
                 <pre><code>import useConfigParam from 'react-use-config';</code></pre>
-                <li><strong>Example:</strong></li>
+                <li><strong>Example usage:</strong></li>
                 <pre><code>
 const geoServer = useConfigParam('geoServer', 'http://localhost:8080/geoserver');
-console.log(geoServer);
+console.log(geoServer); // Output based on priority
                 </code></pre>
             </ol>
         </section>
         <section>
             <h2>Contribute</h2>
-            <p>We welcome contributions! Feel free to <a href="https://github.com/Malnati/react-use-config/issues" target="_blank">open issues</a> or <a href="https://github.com/Malnati/react-use-config/pulls" target="_blank">submit pull requests</a>.</p>
+            <p>We welcome contributions! Open an issue or submit a pull request on the <a href="https://github.com/Malnati/react-use-config" target="_blank">GitHub Repository</a>.</p>
         </section>
         <section>
             <h2>Learn More</h2>
-            <p>Visit the <a href="https://github.com/Malnati/react-use-config" target="_blank">GitHub Repository</a> for more details, documentation, and examples.</p>
+            <p>For more details, visit the <a href="https://github.com/Malnati/react-use-config" target="_blank">GitHub Repository</a>.</p>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 React Use Config | Built with <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> and the <a href="https://pages-themes.github.io/cayman/" target="_blank">Cayman Theme</a>.</p>
+        <p>&copy; 2024 React Use Config | Built with <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> using the <a href="https://pages-themes.github.io/cayman/" target="_blank">Cayman Theme</a>.</p>
     </footer>
 </body>
 </html>
