@@ -1,7 +1,15 @@
-module.exports = {
+// jest.config.js
+
+const { loadEnv } = require('vite');
+
+  module.exports = {
 	testEnvironment: 'jest-environment-jsdom',
 	transform: {
-	  '^.+\\.tsx?$': 'ts-jest'
+	  '^.+\\.tsx?$': 'ts-jest',
 	},
-	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node']
+	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+	setupFiles: ['./jest.env.js'], // Adiciona o ambiente do Vite
+	moduleNameMapper: {
+	  '^@/(.*)$': '<rootDir>/src/$1', // Mapear aliases do Vite
+	},
   };
