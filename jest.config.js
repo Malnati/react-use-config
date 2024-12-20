@@ -3,7 +3,7 @@
 const { loadEnv } = require('vite');
 
   module.exports = {
-	testEnvironment: 'jest-environment-jsdom',
+	testEnvironment: 'node',
 	transform: {
 	  '^.+\\.tsx?$': 'ts-jest',
 	},
