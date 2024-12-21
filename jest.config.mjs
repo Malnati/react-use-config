@@ -1,11 +1,14 @@
 // jest.config.js
 
-import { defaults } from 'ts-jest/presets';
+import { createRequire } from 'module'; // Habilita uso de require em ESM
+const require = createRequire(import.meta.url);
+
+const tsJestPresets = require('ts-jest/presets');
 
 export default {
   testEnvironment: 'jest-environment-jsdom', // Simula o ambiente do navegador
   transform: {
-    ...defaults.transform, // Usa transformações padrão do ts-jest
+    ...tsJestPresets.defaults.transform, // Usa transformações padrão do ts-jest
     '^.+\\.mjs$': 'babel-jest', // Transforma arquivos .mjs com babel-jest
   },
   transformIgnorePatterns: [
