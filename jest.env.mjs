@@ -3,15 +3,23 @@
 import { loadEnv } from 'vite';
 import { Buffer } from 'buffer';
 
-// Polyfill para o Buffer
+// Polyfill para Buffer, necessário para compatibilidade com Node.js
 global.Buffer = Buffer;
 
-// Carrega todas as variáveis de ambiente do Vite
-const env = loadEnv('test', process.cwd());
+// Carregar variáveis do Vite
+const viteEnv = loadEnv('test', process.cwd());
 
-// Simula o comportamento de `import.meta.env`
+// Simular `import.meta.env` com as variáveis do Vite
 global.importMeta = {
   env: {
-    ...env,
+    ...viteEnv, // Carregar variáveis do Vite
   },
 };
+
+// Simular REACT_APP variáveis para compatibilidade com React
+Object.keys(viteEnv).forEach((key) => {
+  if (key.startsWith('VITE_')) {
+    const reactKey = key.replace('VITE_', 'REACT_APP_');
+    process.env[reactKey] = viteEnv[key];
+  }
+});
