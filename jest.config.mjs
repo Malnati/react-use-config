@@ -1,14 +1,18 @@
 // jest.config.js
 
-import { loadEnv } from 'vite';
+import { defaults } from 'ts-jest/presets';
 
 export default {
   testEnvironment: 'jest-environment-jsdom', // Simula o ambiente do navegador
   transform: {
-    '^.+\\.tsx?$': 'ts-jest', // Usa o ts-jest para transformar TypeScript
+    ...defaults.transform, // Usa transformações padrão do ts-jest
+    '^.+\\.mjs$': 'babel-jest', // Transforma arquivos .mjs com babel-jest
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'], // Extensões suportadas
-  setupFiles: ['./jest.env.mjs'], // Configuração para carregar variáveis de ambiente
+  transformIgnorePatterns: [
+    '/node_modules/', // Ignora transformações em node_modules
+  ],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node', 'mjs'], // Extensões suportadas
+  setupFiles: ['./jest.env.js'], // Configuração para carregar variáveis de ambiente
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1', // Mapear aliases como no Vite
   },

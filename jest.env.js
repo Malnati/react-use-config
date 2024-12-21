@@ -1,8 +1,8 @@
 // jest.env.mjs
 
-import { loadEnv } from 'vite';
-import { Buffer } from 'buffer';
-import dotenv from 'dotenv';
+const { loadEnv } = require('vite');
+const dotenv = require('dotenv');
+const { Buffer } = require('buffer');
 
 // Polyfill para o Buffer
 global.Buffer = Buffer;
