@@ -19,29 +19,37 @@ import { useSearchParams } from 'react-router-dom';
  * const showMap = useConfigParam('showMap', true);
  */
 const useConfigParam = (paramName: string, defaultValue: any): any => {
-    if (!paramName) throw new Error('paramName is required');
+  if (!paramName) throw new Error('paramName is required');
 
-    const [searchParams] = useSearchParams();
-    let paramValue = searchParams.get(paramName);
-    if (paramValue) {
-        if (paramValue.toLowerCase() === 'true' || paramValue.toLowerCase() === 'false') {
-            console.info(`[useConfigParam] ${paramName} provided by search query: ${paramValue}`);
-            return paramValue.toLowerCase() === 'true';
-        } else {
-            console.info(`[useConfigParam] ${paramName} provided by search query: ${paramValue}`);
-            return paramValue;
-        }
+  const [searchParams] = useSearchParams();
+  let paramValue = searchParams.get(paramName);
+  if (paramValue) {
+    if (paramValue.toLowerCase() === 'true' || paramValue.toLowerCase() === 'false') {
+      console.info(`[useConfigParam] ${paramName} provided by search query: ${paramValue}`);
+      return paramValue.toLowerCase() === 'true';
+    } else {
+      console.info(`[useConfigParam] ${paramName} provided by search query: ${paramValue}`);
+      return paramValue;
     }
+  }
 
-    const envVal = process.env[`REACT_APP_${paramName.toUpperCase()}`];
-    if (!paramValue && envVal) {
-        paramValue = envVal;
-        console.info(`[useConfigParam] ${paramName} provided by environment variable: ${paramValue}`);
-        return paramValue;
-    }
+  const envVal = process?.env?.[`REACT_APP_${paramName.toUpperCase()}`];
+  const viteEnvVal = (import.meta as any)?.env?.[`VITE_${paramName.toUpperCase()}`];
 
-    console.info(`[useConfigParam] ${paramName} not provided, using default value: ${defaultValue}`);
-    return defaultValue;
+  if (!paramValue && envVal) {
+    paramValue = envVal;
+    console.info(`[useConfigParam] ${paramName} provided by environment variable: ${paramValue}`);
+    return paramValue;
+  }
+
+  if (!paramValue && viteEnvVal) {
+    paramValue = viteEnvVal;
+    console.info(`[useConfigParam] ${paramName} provided by environment variable: ${paramValue}`);
+    return paramValue;
+  }
+
+  console.info(`[useConfigParam] ${paramName} not provided, using default value: ${defaultValue}`);
+  return defaultValue;
 };
 
 export default useConfigParam;
