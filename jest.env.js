@@ -1,22 +1,20 @@
-// jest.env.mjs
+// jest.env.js
 
-const { loadEnv } = require('vite');
 const dotenv = require('dotenv');
 const { Buffer } = require('buffer');
 
 // Polyfill para o Buffer
 global.Buffer = Buffer;
 
-// Carrega variáveis de ambiente do Vite
-const viteEnv = loadEnv('test', process.cwd());
-
 // Carrega variáveis de ambiente padrão do React (.env)
-dotenv.config();
+dotenv.config({ path: '.env' });
+
+// Carrega variáveis de ambiente específicas de teste
+dotenv.config({ path: '.env.test' });
 
 // Simula o comportamento de import.meta.env
 global.importMeta = {
   env: {
-    ...process.env, // Inclui REACT_APP_* e outras do .env padrão
-    ...viteEnv, // Inclui variáveis do Vite
+    ...process.env, // Inclui todas as variáveis carregadas
   },
 };
