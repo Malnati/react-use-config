@@ -1,3 +1,5 @@
+// test/useConfig.test.ts
+
 import { renderHook } from '@testing-library/react';
 import { useSearchParams } from 'react-router-dom';
 import useConfigParam from '../src/hooks/useConfig';
